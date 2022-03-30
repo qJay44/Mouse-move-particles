@@ -37,11 +37,11 @@ class Particle {
         this.x += this.speedX;
         this.y += this.speedY;
 
-        if (this.x >= w) this.speedX *= -1;
-        if (this.x <= 0) this.speedX *= -1;
+        if (this.x + this.size >= w) this.speedX *= -1;
+        if (this.x - this.size <= 0) this.speedX *= -1;
 
-        if (this.y >= h) this.speedY *= -1;
-        if (this.y <= 0) this.speedY *= -1;
+        if (this.y + this.size >= h) this.speedY *= -1;
+        if (this.y - this.size <= 0) this.speedY *= -1;
 
         this.size -= 0.15;
     }
@@ -85,7 +85,6 @@ function updateParticle() {
                 ctx.closePath();
             }
         }
-
     }
 }
 
@@ -97,7 +96,7 @@ function changeOpacity(color, distance) {
 
 // animation loop
 function animate() {
-    ctx.fillStyle = 'hsla(0, 0%, 7%, 1)';
+    ctx.fillStyle = 'hsla(0, 0%, 7%, 0.01)';
     ctx.fillRect(0, 0, w, h);
     updateParticle();
     hue != 360 ? hue++ : hue = 0;
